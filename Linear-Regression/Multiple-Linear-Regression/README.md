@@ -1,184 +1,154 @@
-# Social Network Ads Purchase Prediction using Logistic Regression
+# Multiple Linear Regression
 
-## 📌 Project Overview
-This project uses **Logistic Regression** to predict whether a customer will purchase a product based on demographic and social network advertising data.
-
-The dataset contains information such as:
-- Age
-- Estimated Salary
-- Gender
-- Purchase Status (Target Variable)
-
-The goal is to build a classification model that predicts customer purchasing behavior.
+## Project Overview
+This project demonstrates the implementation of **Multiple Linear Regression**, a supervised machine learning algorithm used to predict a continuous target variable based on multiple independent variables. The objective is to analyze the relationship between several predictors and the target variable and build a model capable of making accurate predictions.
 
 ---
 
-## 📂 Dataset Information
-
-| Feature | Description |
-|----------|-------------|
-| User ID | Unique customer identifier |
-| Gender | Male/Female |
-| Age | Customer age |
-| Estimated Salary | Annual estimated salary |
-| Purchased | Target variable (0 = Not Purchased, 1 = Purchased) |
+## Problem Statement
+The goal of this project is to predict a dependent variable using multiple independent variables. By applying Multiple Linear Regression, we identify how different features influence the target variable and evaluate the model's predictive performance.
 
 ---
 
-## 🛠️ Libraries Used
+## Dataset Information
 
-```python
-pandas
-numpy
-matplotlib
-seaborn
-scikit-learn
-```
+### Dataset Shape
+- Total Rows: *[Enter Number of Rows]*
+- Total Columns: *[Enter Number of Columns]*
 
----
+### Features
+#### Independent Variables (X)
+- Feature 1
+- Feature 2
+- Feature 3
+- ...
+- Feature n
 
-## 🔍 Data Preprocessing
-
-### 1. Data Loading
-- Loaded dataset using Pandas.
-
-### 2. Data Exploration
-- Checked data types
-- Generated descriptive statistics
-
-### 3. Duplicate Check
-- Verified duplicate records using:
-```python
-df.duplicated().sum()
-```
-
-### 4. Missing Value Check
-- Checked for null values using:
-```python
-df.isna().sum()
-```
-
-### 5. Outlier Detection
-- Visualized outliers using boxplots.
-
-### 6. Encoding
-- Converted the categorical **Gender** column into numerical format using One-Hot Encoding.
-
-```python
-df = pd.get_dummies(df, columns=['Gender'], dtype=int)
-```
-
-### 7. Feature Selection
-- Removed the `User ID` column since it does not contribute to prediction.
+#### Dependent Variable (Y)
+- Target Variable
 
 ---
 
-## 🤖 Model Building
+## Data Preprocessing
+The following preprocessing steps were performed:
 
-### Defining Features and Target
-
-```python
-X = df.drop(columns=['Purchased'])
-y = df['Purchased']
-```
-
-### Train-Test Split
-
-```python
-train_test_split(
-    X,
-    y,
-    test_size=0.25,
-    random_state=42
-)
-```
-
-- Training Data: 75%
-- Testing Data: 25%
-
-### Logistic Regression Model
-
-```python
-lr = LogisticRegression()
-lr.fit(X_train, y_train)
-```
+1. Imported required libraries.
+2. Loaded the dataset.
+3. Checked for missing values.
+4. Removed duplicate records (if any).
+5. Performed Exploratory Data Analysis (EDA).
+6. Encoded categorical variables (if required).
+7. Handled outliers (if necessary).
+8. Split the data into training and testing sets.
 
 ---
 
-## 📈 Prediction
+## Exploratory Data Analysis (EDA)
+
+### Univariate Analysis
+- Analyzed the distribution of individual features.
+- Used histograms, boxplots, and summary statistics.
+
+### Bivariate Analysis
+- Examined relationships between independent variables and the target variable.
+- Used scatter plots and correlation analysis.
+
+### Correlation Analysis
+- Generated a correlation heatmap to identify relationships among variables.
+- Detected multicollinearity between predictors.
+
+---
+
+## Model Building
+
+### Algorithm Used
+**Multiple Linear Regression**
+
+### Steps
+1. Split data into training and testing sets.
+2. Trained the Multiple Linear Regression model.
+3. Generated predictions on test data.
+4. Evaluated model performance using regression metrics.
+
+---
+
+## Model Evaluation Metrics
+
+The model was evaluated using:
+
+- Mean Squared Error (MSE)
+- Root Mean Squared Error (RMSE)
+- Mean Absolute Error (MAE)
+- R² Score
+
+### Formulae
+
+**Mean Squared Error (MSE)**
+
+\[
+MSE = \frac{1}{n}\sum(y_i - \hat{y_i})^2
+\]
+
+**Root Mean Squared Error (RMSE)**
+
+\[
+RMSE = \sqrt{MSE}
+\]
+
+**Mean Absolute Error (MAE)**
+
+\[
+MAE = \frac{1}{n}\sum|y_i - \hat{y_i}|
+\]
+
+**R² Score**
+
+\[
+R^2 = 1 - \frac{SS_{res}}{SS_{tot}}
+\]
+
+---
+
+## Results
+
+| Metric | Value |
+|---------|---------|
+| Mean Squared Error (MSE) | *Enter Value* |
+| Root Mean Squared Error (RMSE) | *Enter Value* |
+| Mean Absolute Error (MAE) | *Enter Value* |
+| R² Score | *Enter Value* |
+
+---
+
+## Conclusion
+
+- Multiple Linear Regression was successfully implemented to predict the target variable.
+- The model learned the relationship between multiple independent variables and the dependent variable.
+- Performance was evaluated using MSE, RMSE, MAE, and R² Score.
+- A higher R² score indicates better model performance and stronger explanatory power.
+- Further improvements can be achieved through feature engineering, outlier treatment, and hyperparameter tuning.
+
+---
+
+## Technologies Used
+
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-learn
+
+---
+
+## Libraries Required
 
 ```python
-y_pred = lr.predict(X_test)
-```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-The trained model predicts whether a customer is likely to purchase the product.
-
----
-
-## 📊 Model Evaluation
-
-### Confusion Matrix
-
-```python
-confusion_matrix(y_test, y_pred)
-```
-
-### Heatmap Visualization
-
-```python
-sns.heatmap(confusion_matrix(y_test, y_pred), annot=True)
-plt.show()
-```
-
-### Classification Report
-
-```python
-classification_report(y_test, y_pred)
-```
-
-Evaluation metrics include:
-- Accuracy
-- Precision
-- Recall
-- F1-Score
-
----
-
-## 🚀 Project Workflow
-
-1. Import Libraries
-2. Load Dataset
-3. Explore Data
-4. Check Duplicates
-5. Handle Missing Values
-6. Detect Outliers
-7. Encode Categorical Features
-8. Remove Unnecessary Columns
-9. Split Data into Train & Test Sets
-10. Train Logistic Regression Model
-11. Make Predictions
-12. Evaluate Model Performance
-
----
-
-## 🎯 Conclusion
-
-A Logistic Regression classifier was developed to predict customer purchase behavior from social network advertisement data. After preprocessing the dataset and encoding categorical variables, the model was trained and evaluated using classification metrics and a confusion matrix. The project demonstrates how Logistic Regression can be effectively applied to binary classification problems in marketing and customer analytics.
-
----
-
-## 📁 Repository Structure
-
-```text
-├── Logistic Regression maam task.ipynb
-├── Social_Network_Ads.csv
-├── README.md
-```
-
----
-
-## 👩‍💻 Author
-
-Mahima Adhale
-
-**Domain:** Machine Learning & Data Analytics
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
